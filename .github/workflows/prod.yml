@@ -3,7 +3,7 @@ name: Deploy react app to s3 and cloudfront
 on:
   push:
     branches:
-      - master
+      - develop
 jobs:
   build:
     env:
@@ -12,11 +12,12 @@ jobs:
       AWS_DEFAULT_REGION: ${{ vars.AWS_DEFAULT_REGION }}
       AWS_DISTRIBUTION_ID: ${{ secrets.AWS_DISTRIBUTION_ID }}
     runs-on: ubuntu-latest
+    environment: prod
     steps:
       - uses: actions/checkout@v2
       - run: yarn
       - run: yarn build --base=/${{ vars.VITE_APP_BASE_PATH }}/
         env:
           VITE_APP_BASE_PATH: ${{ vars.VITE_APP_BASE_PATH }}
-      - run: aws s3 sync dist/ s3://${{ vars.AWS_S3_BUCKET_NAME }}/${{ vars.VITE_APP_BASE_PATH }} --region ${{ vars.AWS_DEFAULT_REGION }}
-      - run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --paths "/${{ vars.VITE_APP_BASE_PATH }}/index.html"
+      - run: aws s3 sync dist/ s3://${{ vars.AWS_S3_BUCKET_NAME }}/${{ vars.VITE_APP_BASE_PATH }} --region us-east-2
+      - run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} --paths "/${{ vars.VITE_APP_BASE_PATH }}/*"
