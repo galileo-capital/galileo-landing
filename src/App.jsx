@@ -12,7 +12,6 @@ import Loader from "./components/Loader/Loader"
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger, TextPlugin } from "gsap/all"
-import { useState } from "react"
 
 
 import './components/i18n';
