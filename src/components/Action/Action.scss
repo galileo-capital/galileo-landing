@@ -45,6 +45,10 @@
   &_decorTop {
     z-index: 2;
 
+    @media(max-width: 500px) {
+      top: 200px;
+    }
+
     &_text {
       width: 100% !important;
       top: 365px;
@@ -54,6 +58,10 @@
 
       @media(max-width: 880px) {
         top: calc(40vw + 50px);
+      }
+      @media(max-width: 500px) {
+        top: 300px;
+        left: 8px;
       }
 
       &_header {
@@ -94,6 +102,10 @@
       font-size: 14px;
       font-family: 'RoobertTRIAL-Light', monospace;
       color: #7C49E1;
+
+      @media screen and (max-width: 880px) {
+        margin-bottom: 50px;
+      }
     }
 
     &-img {

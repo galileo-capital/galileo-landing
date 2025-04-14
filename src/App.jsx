@@ -40,7 +40,6 @@ function App() {
       <Team />
       <Footer />
       <Background bottom />
-
     </div>
   )
 }

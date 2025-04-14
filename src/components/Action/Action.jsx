@@ -1,15 +1,17 @@
 import { useGSAP } from '@gsap/react';
 import './Action.scss';
 import gsap from 'gsap';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { observer } from 'mobx-react-lite';
 import langStore from '../../store/langStore';
+import GetTheApp from '../GetTheApp/GetTheApp';
 
 const partners = ['skillful', 'betcris', 'sicsa', 'sport', 'anyone', 'ocean']
 const partnersx3 = [...partners, ...partners, ...partners, ...partners,]
 
 export default observer(() => {
+    const [showGetTheApp, setShowGetTheApp] = useState(false);
     const app = useRef(null); // Создаем массив ссылок на элементы
     const { t, i18n } = useTranslation();
     useEffect(() => {
@@ -89,7 +91,7 @@ export default observer(() => {
                     <p className='Action__container-title'>/ {t('Galileo in Action')} /</p>
                     {/* <img src={`${import.meta.env.VITE_APP_BASE_PATH}/img/Action/bubbles.svg`} alt="" className='Action__container-img' /> */}
                     <div className='Action__decorPlace' id='Clients'></div>
-                    <p className='Action__container-title Action_partners_header'>/ {t('Our clients')} /</p>
+                    {/*<p className='Action__container-title Action_partners_header'>/ {t('Our clients')} /</p>
 
                     <div className='Action__container-partnes' >
                         {
@@ -97,15 +99,19 @@ export default observer(() => {
                                 return <img src={`/img/Action/${partner}.svg`} alt="" />
                             })
                         }
-                    </div>
+                    </div>*/}
                     <div className='Action__container-demo'>
                         <img src={`${import.meta.env.VITE_APP_BASE_PATH}/img/Action/demo.svg`} alt="" className='Action__container-demo-img' />
                         <img src={`${import.meta.env.VITE_APP_BASE_PATH}/img/Action/demoPhone.png`} alt="" className='Action__container-demo-img-phone' />
-                        <a href='#' target='_blank'>{t('Get the App')} <img src={`${import.meta.env.VITE_APP_BASE_PATH}/img/arrow.png`} alt="" /></a>
+                        <a href='#' onClick={e => {
+                            e.preventDefault();
+                            setShowGetTheApp(true);
+                        }}>{t('Get the App')} <img src={`${import.meta.env.VITE_APP_BASE_PATH}/img/arrow.png`} alt="" /></a>
                         <img src={`${import.meta.env.VITE_APP_BASE_PATH}/img/Action/phone.png`} alt="" className='Action__container-demo-phone' />
                     </div>
                 </div>
             </div>
+            {  showGetTheApp && <GetTheApp onRequestClose={() => setShowGetTheApp(false)}/>}
         </div>
     )
 })
