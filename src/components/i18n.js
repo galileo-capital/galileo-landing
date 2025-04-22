@@ -15,7 +15,7 @@ i18n
         },
         backend: {
             loadPath: `${import.meta.env.VITE_APP_BASE_PATH}/locales/{{lng}}/translation.json`,
-        }
+        },
     });
 
 export default i18n;
